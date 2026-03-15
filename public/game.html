@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>游戏时间</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <style>
+    body { background: linear-gradient(135deg, #E8F8F5 0%, #D5F5E3 50%, #ABEBC6 100%); }
+    .game-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(255,255,255,0.9); border-radius: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .back-btn { font-size: 35px; background: #FF6B6B; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255,107,107,0.4); transition: all 0.3s; }
+    .back-btn:hover { transform: scale(1.1); }
+    .game-info { display: flex; align-items: center; gap: 30px; }
+    .game-title { font-size: 24px; color: #2D3436; }
+    .score-display { font-size: 28px; color: #FDCB6E; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    .question-display { text-align: center; padding: 20px; font-size: 32px; color: #2D3436; margin-bottom: 20px; }
+    .speak-btn { font-size: 24px; background: #4ECDC4; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; margin-left: 15px; vertical-align: middle; box-shadow: 0 3px 10px rgba(78,205,196,0.4); }
+    .game-area { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+    .options-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 800px; }
+    .game-option { width: 150px; height: 150px; background: white; border-radius: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 60px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid transparent; user-select: none; -webkit-tap-highlight-color: transparent; }
+    .game-option:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+    .game-option:active { transform: scale(0.9); }
+    .correct { animation: correctPulse 0.5s ease; border-color: #00B894 !important; background: #E8F8F5 !important; }
+    @keyframes correctPulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    .wrong { animation: wrongShake 0.5s ease; border-color: #E17055 !important; background: #FDEDEC !important; }
+    @keyframes wrongShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-20px) rotate(-5deg); } 40% { transform: translateX(20px) rotate(5deg); } 60% { transform: translateX(-20px) rotate(-5deg); } 80% { transform: translateX(20px) rotate(5deg); } }
+    .count-options { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .count-option { width: 100px; height: 100px; background: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 48px; color: #2D3436; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 4px solid transparent; }
+    .count-option:hover { transform: scale(1.1); border-color: #4ECDC4; }
+    .count-option:active { transform: scale(0.95); }
+    .progress-bar { width: 100%; max-width: 400px; height: 12px; background: rgba(255,255,255,0.5); border-radius: 10px; margin: 20px auto; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #00B894, #4ECDC4); border-radius: 10px; transition: width 0.5s ease; }
+    .direction-grid { display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 10px; }
+    .direction-cell { background: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 3px solid transparent; }
+    .direction-cell:hover { transform: scale(1.05); border-color: #4ECDC4; }
+    .direction-cell.center { background: #F1F2F6; font-size: 20px; color: #636E72; }
+    .items-row { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+    .item-display { font-size: 60px; }
+    @media (max-width: 768px) {
+      .game-header { flex-direction: column; gap: 15px; text-align: center; }
+      .game-option { width: 120px; height: 120px; font-size: 45px; }
+      .options-grid { gap: 15px; }
+      .question-display { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="game-header">
+      <button class="back-btn" onclick="location.href='/'">⬅️</button>
+      <div class="game-info">
+        <span class="game-title" id="gameTitle">游戏</span>
+        <span class="score-display">⭐ <span id="score">0</span></span>
+      </div>
+    </header>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+    <div class="question-display">
+      <span id="questionText">准备开始游戏...</span>
+      <button class="speak-btn" onclick="replayQuestion()">🔊</button>
+    </div>
+    <main class="game-area"><div class="options-grid" id="gameOptions"></div></main>
+  </div>
+
+  <script src="/js/games.js"></script>
+  <script>
+    let currentGame = null, currentQuestion = null, score = 0, isAnswering = false, questionCount = 0;
+    const MAX_QUESTIONS = 10;
+    
+    function initGame() {
+      const gameId = new URLSearchParams(location.search).get('game');
+      currentGame = GAMES.find(g => g.id === gameId);
+      if (!currentGame) { alert('游戏不存在'); location.href = '/'; return; }
+      document.getElementById('gameTitle').textContent = currentGame.name;
+      nextQuestion();
+    }
+    
+    function nextQuestion() {
+      if (questionCount >= MAX_QUESTIONS) { endGame(); return; }
+      questionCount++;
+      document.getElementById('progressFill').style.width = (questionCount / MAX_QUESTIONS * 100) + '%';
+      isAnswering = false;
+      const gl = GameLogic[currentGame.id];
+      currentQuestion = gl.generateQuestion();
+      document.getElementById('questionText').textContent = currentQuestion.question;
+      setTimeout(() => gl.speakQuestion(currentQuestion), 500);
+      renderOptions();
+    }
+    
+    function renderOptions() {
+      const container = document.getElementById('gameOptions');
+      container.innerHTML = '';
+      const gid = currentGame.id;
+      const q = currentQuestion;
+      
+      if (gid === 'count') {
+        const row = document.createElement('div');
+        row.className = 'items-row';
+        q.items.forEach(item => { row.innerHTML += `<span class="item-display">${item}</span>`; });
+        container.appendChild(row);
+        const opts = document.createElement('div');
+        opts.className = 'count-options';
+        [1,2,3,4,5].forEach(n => { opts.innerHTML += `<button class="count-option" onclick="checkAnswer(${n})">${n}</button>`; });
+        container.appendChild(opts);
+        return;
+      }
+      
+      if (gid === 'compare-size') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.style.gap = '40px';
+        [{k:'left',v:q.item1},{k:'right',v:q.item2}].forEach(it => {
+          wrap.innerHTML += `<button class="game-option" onclick="checkAnswer('${it.k}')" style="transform:scale(${it.v.scale})">${it.v.icon}</button>`;
+        });
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'direction') {
+        const grid = document.createElement('div');
+        grid.className = 'direction-grid';
+        const map = {top:'⬆️',bottom:'⬇️',left:'⬅️',right:'➡️'};
+        const cells = [[null,'top',null],['left',null,'right'],[null,'bottom',null]];
+        cells.forEach(row => {
+          row.forEach(pos => {
+            const cell = document.createElement('div');
+            if (pos) {
+              cell.className = 'direction-cell';
+              cell.textContent = map[pos];
+              cell.onclick = () => checkAnswer(q.pos[pos]);
+            } else {
+              cell.className = 'direction-cell center';
+              cell.textContent = '👶';
+            }
+            grid.appendChild(cell);
+          });
+        });
+        container.appendChild(grid);
+        return;
+      }
+      
+      const wrap = document.createElement('div');
+      wrap.className = 'options-grid';
+      q.options.forEach(opt => {
+        const isObj = typeof opt === 'object';
+        const content = isObj ? opt.icon : opt;
+        const data = isObj ? JSON.stringify(opt).replace(/"/g,'&quot;') : `'${opt}'`;
+        wrap.innerHTML += `<button class="game-option" onclick='checkAnswer(${data})'>${content}</button>`;
+      });
+      container.appendChild(wrap);
+    }
+    
+    function checkAnswer(answer) {
+      if (isAnswering) return;
+      const gl = GameLogic[currentGame.id];
+      const isCorrect = gl.check(answer, currentQuestion);
+      isAnswering = true;
+      
+      const opts = document.querySelectorAll('.game-option, .count-option, .direction-cell');
+      let clicked = null;
+      opts.forEach(o => {
+        if (o.onclick.toString().includes(answer) || o.textContent.includes(answer?.icon || answer)) clicked = o;
+      });
+      
+      if (isCorrect) {
+        score += 10;
+        document.getElementById('score').textContent = score;
+        if (clicked) clicked.classList.add('correct');
+        playCorrectSound();
+        createStars(clicked);
+        setTimeout(nextQuestion, 1500);
+      } else {
+        if (clicked) clicked.classList.add('wrong');
+        playWrongSound();
+        setTimeout(() => { isAnswering = false; if (clicked) clicked.classList.remove('wrong'); }, 1000);
+      }
+    }
+    
+    function createStars(el) {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+      ['⭐','✨','🌟','💫'].forEach((s,i) => {
+        const star = document.createElement('div');
+        star.textContent = s;
+        star.style.cssText = `position:fixed;left:${cx}px;top:${cy}px;font-size:40px;pointer-events:none;z-index:9999;animation:particleFall 1.5s ease-out forwards;--tx:${Math.cos(i/4*Math.PI)*100}px;--ty:${Math.sin(i/4*Math.PI)*100}px;`;
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 1500);
+      });
+    }
+    
+    function replayQuestion() { if (currentQuestion && !isAnswering) GameLogic[currentGame.id].speakQuestion(currentQuestion); }
+    
+    function endGame() {
+      const msg = score >= 80 ? '超级厉害！' : score >= 50 ? '真棒！' : '加油！';
+      speak(`游戏结束！你得了${score}分，${msg}`);
+      document.getElementById('questionText').textContent = `🎉 游戏结束！得分：${score} 🎉`;
+      fetch('/api/score', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score})});
+      document.getElementById('gameOptions').innerHTML = `
+        <button class="btn btn-primary" onclick="restartGame()" style="font-size:24px;padding:20px 50px;">再玩一次 🔄</button>
+        <button class="btn btn-secondary" onclick="location.href='/'" style="font-size:24px;padding:20px 50px;margin-left:20px;">返回主页 🏠</button>
+      `;
+    }
+    
+    function restartGame() { score = 0; questionCount = 0; document.getElementById('score').textContent = '0'; nextQuestion(); }
+    
+    window.onload = initGame;
+  </script>
+</body>
+</html>
