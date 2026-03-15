@@ -38,6 +38,40 @@ const GAMES = [
   { id: 'instrument', name: '乐器认知', icon: '🎹', age: '1-2岁', color: '#8E44AD', color2: '#A569BD' },
   { id: 'opposite', name: '反义词', icon: '🔄', age: '2-3岁', color: '#E67E22', color2: '#F5B041' },
   { id: 'category', name: '分类游戏', icon: '📂', age: '2-3岁', color: '#2E86C1', color2: '#5DADE2' },
+  { id: 'animal-food', name: '动物食物', icon: '🦁', age: '1-2岁', color: '#E74C3C', color2: '#F1948A' },
+  { id: 'fruit-color', name: '水果颜色', icon: '🍓', age: '1-2岁', color: '#FF6B6B', color2: '#FF8A80' },
+  { id: 'big-small', name: '大小认识', icon: '🐘', age: '1-2岁', color: '#3498DB', color2: '#85C1E9' },
+  { id: 'tall-short', name: '高矮认识', icon: '👫', age: '1-2岁', color: '#9B59B6', color2: '#D2B4DE' },
+  { id: 'heavy-light', name: '轻重认识', icon: '⚖️', age: '2-3岁', color: '#1ABC9C', color2: '#76D7C4' },
+  { id: 'hot-cold', name: '冷热认识', icon: '🌡️', age: '1-2岁', color: '#E67E22', color2: '#F5B041' },
+  { id: 'wet-dry', name: '干湿认识', icon: '💧', age: '1-2岁', color: '#3498DB', color2: '#AED6F1' },
+  { id: 'loud-quiet', name: '声音大小', icon: '🔊', age: '1-2岁', color: '#F39C12', color2: '#F7DC6F' },
+  { id: 'day-activity', name: '日常活动', icon: '📅', age: '2-3岁', color: '#2ECC71', color2: '#82E0AA' },
+  { id: 'family', name: '家人认知', icon: '👨‍👩‍👧', age: '1-2岁', color: '#E91E63', color2: '#F48FB1' },
+  { id: 'color-name', name: '颜色名称', icon: '🌈', age: '2-3岁', color: '#00BCD4', color2: '#80DEEA' },
+  { id: 'count-animal', name: '数动物', icon: '🦁', age: '2-3岁', color: '#FF9800', color2: '#FFB74D' },
+  { id: 'find-number', name: '找数字', icon: '🔢', age: '2-3岁', color: '#673AB7', color2: '#B39DDB' },
+  { id: 'math-add', name: '简单加法', icon: '➕', age: '3岁', color: '#4CAF50', color2: '#81C784' },
+  { id: 'math-sub', name: '简单减法', icon: '➖', age: '3岁', color: '#F44336', color2: '#EF9A9A' },
+  { id: 'time-clock', name: '认识时钟', icon: '🕐', age: '3岁', color: '#795548', color2: '#BCAAA4' },
+  { id: 'direction-compass', name: '东南西北', icon: '🧭', age: '3岁', color: '#607D8B', color2: '#B0BEC5' },
+  { id: 'first-last', name: '第一最后', icon: '🏁', age: '2-3岁', color: '#FF5722', color2: '#FF8A65' },
+  { id: 'middle', name: '中间位置', icon: '↔️', age: '2-3岁', color: '#9C27B0', color2: '#CE93D8' },
+  { id: 'pair-socks', name: '配对袜子', icon: '🧦', age: '2-3岁', color: '#00BCD4', color2: '#80DEEA' },
+  { id: 'finish-line', name: '谁先到', icon: '🏃', age: '2-3岁', color: '#E74C3C', color2: '#F1948A' },
+  { id: 'weather-choice', name: '穿什么', icon: '👕', age: '2-3岁', color: '#03A9F4', color2: '#81D4FA' },
+  { id: 'food-drink', name: '食物饮料', icon: '🍔', age: '1-2岁', color: '#FF9800', color2: '#FFCC80' },
+  { id: 'live-nonlive', name: '生物非生物', icon: '🌱', age: '2-3岁', color: '#4CAF50', color2: '#A5D6A7' },
+  { id: 'hard-soft', name: '软硬认识', icon: '🪨', age: '1-2岁', color: '#795548', color2: '#BCAAA4' },
+  { id: 'smooth-rough', name: '光滑粗糙', icon: '✨', age: '2-3岁', color: '#9E9E9E', color2: '#E0E0E0' },
+  { id: 'open-close', name: '开关门', icon: '🚪', age: '1-2岁', color: '#8D6E63', color2: '#BCAAA4' },
+  { id: 'full-empty', name: '满与空', icon: '🫗', age: '1-2岁', color: '#2196F3', color2: '#90CAF9' },
+  { id: 'move-static', name: '动与静', icon: '🏃', age: '1-2岁', color: '#FF5722', color2: '#FFAB91' },
+  { id: 'same-group', name: '同类词', icon: '📚', age: '3岁', color: '#3F51B5', color2: '#9FA8DA' },
+  { id: 'what-matter', name: '这是什么', icon: '❓', age: '1-2岁', color: '#E91E63', color2: '#F8BBD0' },
+  { id: 'where-go', name: '去哪里', icon: '🏠', age: '2-3岁', color: '#009688', color2: '#80CBC4' },
+  { id: 'feeling', name: '感觉认知', icon: '💓', age: '1-2岁', color: '#F06292', color2: '#F8BBD0' },
+  { id: 'color-sort', name: '颜色排序', icon: '🔴', age: '2-3岁', color: '#F44336', color2: '#EF9A9A' },
 ];
 
 // 语音
@@ -558,6 +592,422 @@ const GameLogic = {
     },
     speakQuestion(q) { speak(`点击${q.cat.name}`); },
     check(answer, q) { return answer.name === q.cat.name; }
+  },
+  'animal-food': {
+    generateQuestion() {
+      const animals = [
+        { name: '小狗', icon: '🐶', food: '🦴' },
+        { name: '小猫', icon: '🐱', food: '🐟' },
+        { name: '兔子', icon: '🐰', food: '🥕' },
+        { name: '熊猫', icon: '🐼', food: '🎋' }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      const options = animals.map(a => a.food);
+      return { target, question: `${target.name}喜欢吃什么？`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'fruit-color': {
+    generateQuestion() {
+      const fruits = [
+        { name: '红苹果', icon: '🍎', color: '红色' },
+        { name: '黄香蕉', icon: '🍌', color: '黄色' },
+        { name: '绿西瓜', icon: '🍉', color: '绿色' },
+        { name: '橙橘子', icon: '🍊', color: '橙色' }
+      ];
+      const target = fruits[Math.floor(Math.random() * fruits.length)];
+      return { target, question: `${target.icon}是什么颜色？`, options: fruits };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.color === q.target.color; }
+  },
+  'big-small': {
+    generateQuestion() {
+      const pairs = [
+        { big: '🐘', small: '🐭', bigName: '大象', smallName: '老鼠' },
+        { big: '🐳', small: '🐟', bigName: '鲸鱼', smallName: '小鱼' }
+      ];
+      const p = pairs[Math.floor(Math.random() * pairs.length)];
+      const which = Math.random() > 0.5;
+      return { which, ...p, question: which ? '哪个更大？' : '哪个更小？', correct: which ? p.bigName : p.smallName };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'tall-short': {
+    generateQuestion() {
+      const pairs = [
+        { tall: '🏢', short: '🏠', tallName: '楼房', shortName: '房子' },
+        { tall: '👨', short: '👦', tallName: '大人', shortName: '小孩' }
+      ];
+      const p = pairs[Math.floor(Math.random() * pairs.length)];
+      const which = Math.random() > 0.5;
+      return { which, ...p, question: which ? '哪个更高？' : '哪个更矮？', correct: which ? p.tallName : p.shortName };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'heavy-light': {
+    generateQuestion() {
+      const pairs = [
+        { heavy: '🐘', light: '🎈', heavyName: '大象', lightName: '气球' },
+        { heavy: '📚', light: '🪶', heavyName: '书', lightName: '羽毛' }
+      ];
+      const p = pairs[Math.floor(Math.random() * pairs.length)];
+      const which = Math.random() > 0.5;
+      return { which, ...p, question: which ? '哪个更重？' : '哪个更轻？', correct: which ? p.heavyName : p.lightName };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'hot-cold': {
+    generateQuestion() {
+      const items = [
+        { name: '热水', icon: '♨️' }, { name: '冰块', icon: '🧊' },
+        { name: '太阳', icon: '☀️' }, { name: '雪人', icon: '⛄' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `哪个是热的？`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === '热水' || answer.name === '太阳'; }
+  },
+  'wet-dry': {
+    generateQuestion() {
+      const items = [
+        { name: '湿毛巾', icon: '🧖', wet: true },
+        { name: '干毛巾', icon: '🧴', wet: false },
+        { name: '游泳池', icon: '🏊', wet: true },
+        { name: '沙漠', icon: '🏜️', wet: false }
+      ];
+      const isWet = Math.random() > 0.5;
+      return { isWet, question: isWet ? '哪个是湿的？' : '哪个是干的？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isWet ? answer.wet : !answer.wet; }
+  },
+  'loud-quiet': {
+    generateQuestion() {
+      const sounds = [
+        { name: '大声', icon: '🔊' }, { name: '小声', icon: '🔈' },
+        { name: '雷声', icon: '⛈️' }, { name: '耳语', icon: '🤫' }
+      ];
+      const isLoud = Math.random() > 0.5;
+      return { isLoud, question: isLoud ? '哪个声音大？' : '哪个声音小？', options: sounds };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return (q.isLoud && (answer.name === '大声' || answer.name === '雷声')) || (!q.isLoud && (answer.name === '小声' || answer.name === '耳语')); }
+  },
+  'day-activity': {
+    generateQuestion() {
+      const activities = [
+        { name: '早上起床', icon: '🌅' }, { name: '中午吃饭', icon: '🍚' },
+        { name: '晚上睡觉', icon: '🌙' }, { name: '下午玩耍', icon: '🎈' }
+      ];
+      const target = activities[Math.floor(Math.random() * activities.length)];
+      return { target, question: `${target.name}是在什么时候？`, options: activities };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'family': {
+    generateQuestion() {
+      const members = [
+        { name: '爸爸', icon: '👨' }, { name: '妈妈', icon: '👩' },
+        { name: '爷爷', icon: '👴' }, { name: '奶奶', icon: '👵' },
+        { name: '哥哥', icon: '👦' }, { name: '姐姐', icon: '👧' }
+      ];
+      const target = members[Math.floor(Math.random() * members.length)];
+      return { target, question: `点击${target.name}`, options: members };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'color-name': {
+    generateQuestion() {
+      const colors = [
+        { name: '红色', icon: '🔴' }, { name: '蓝色', icon: '🔵' },
+        { name: '黄色', icon: '🟡' }, { name: '绿色', icon: '🟢' }
+      ];
+      const target = colors[Math.floor(Math.random() * colors.length)];
+      return { target, question: `这个颜色叫什么？`, options: colors };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'count-animal': {
+    generateQuestion() {
+      const animals = ['🐶','🐱','🐰','🦊'];
+      const count = Math.floor(Math.random() * 3) + 1;
+      return { items: Array(count).fill(animals[Math.floor(Math.random()*4)]), count, question: `数一数有几只动物？` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.count; }
+  },
+  'find-number': {
+    generateQuestion() {
+      const nums = ['1','2','3','4','5','6','7','8','9'];
+      const target = nums[Math.floor(Math.random() * 9)];
+      const others = nums.filter(n => n !== target).slice(0, 3);
+      const options = [...others, target].sort(() => Math.random() - 0.5);
+      return { target, options, question: `找出数字${target}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'math-add': {
+    generateQuestion() {
+      const a = Math.floor(Math.random() * 5) + 1;
+      const b = Math.floor(Math.random() * 3) + 1;
+      const answer = a + b;
+      const options = [answer, answer + 1, answer - 1, answer + 2].sort(() => Math.random() - 0.5);
+      return { a, b, answer, options, question: `${a}加${b}等于几？` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.answer; }
+  },
+  'math-sub': {
+    generateQuestion() {
+      const a = Math.floor(Math.random() * 5) + 5;
+      const b = Math.floor(Math.random() * 3) + 1;
+      const answer = a - b;
+      const options = [answer, answer + 1, answer - 1, answer + 2].sort(() => Math.random() - 0.5);
+      return { a, b, answer, options, question: `${a}减${b}等于几？` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.answer; }
+  },
+  'time-clock': {
+    generateQuestion() {
+      const times = [
+        { name: '3点', hour: 3 }, { name: '6点', hour: 6 },
+        { name: '9点', hour: 9 }, { name: '12点', hour: 12 }
+      ];
+      const target = times[Math.floor(Math.random() * times.length)];
+      return { target, question: `这是几点？`, options: times };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.hour === q.target.hour; }
+  },
+  'direction-compass': {
+    generateQuestion() {
+      const dirs = [
+        { name: '东', icon: '➡️' }, { name: '南', icon: '⬇️' },
+        { name: '西', icon: '⬅️' }, { name: '北', icon: '⬆️' }
+      ];
+      const target = dirs[Math.floor(Math.random() * dirs.length)];
+      return { target, question: `哪个是${target.name}？`, options: dirs };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'first-last': {
+    generateQuestion() {
+      const racers = ['🏃','🚶','🐢','🐇'];
+      const names = ['第一名','第二名','第三名','第四名'];
+      const target = names[Math.floor(Math.random() * 4)];
+      return { target, racers, question: `谁是${target}？`, options: names };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'middle': {
+    generateQuestion() {
+      const items = ['🍎','🍊','🍋'];
+      return { items, question: '哪个在中间？', correct: '🍊' };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'pair-socks': {
+    generateQuestion() {
+      const socks = ['🧦','🧦','🧦','🧦'];
+      const idx = Math.floor(Math.random() * 4);
+      socks[idx] = '🧦';
+      return { socks, question: '找出相同的袜子', target: '🧦' };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'finish-line': {
+    generateQuestion() {
+      const racers = [
+        { name: '小兔子', icon: '🐇', fast: true },
+        { name: '小乌龟', icon: '🐢', fast: false }
+      ];
+      const target = Math.random() > 0.5 ? racers[0] : racers[1];
+      return { target, question: '谁先到达终点？', options: racers };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'weather-choice': {
+    generateQuestion() {
+      const weather = [
+        { name: '晴天', icon: '☀️', clothes: '👕' },
+        { name: '下雨', icon: '🌧️', clothes: '🧥' }
+      ];
+      const target = weather[Math.floor(Math.random() * weather.length)];
+      return { target, question: `天气${target.name}穿什么？`, options: weather };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'food-drink': {
+    generateQuestion() {
+      const foods = [
+        { name: '汉堡', icon: '🍔', type: '食物' },
+        { name: '可乐', icon: '🥤', type: '饮料' },
+        { name: '苹果', icon: '🍎', type: '食物' },
+        { name: '果汁', icon: '🧃', type: '饮料' }
+      ];
+      const isFood = Math.random() > 0.5;
+      return { isFood, question: isFood ? '哪些是食物？' : '哪些是饮料？', options: foods };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isFood ? answer.type === '食物' : answer.type === '饮料'; }
+  },
+  'live-nonlive': {
+    generateQuestion() {
+      const items = [
+        { name: '小狗', icon: '🐶', live: true },
+        { name: '石头', icon: '🪨', live: false },
+        { name: '小花', icon: '🌸', live: true },
+        { name: '汽车', icon: '🚗', live: false }
+      ];
+      const isLive = Math.random() > 0.5;
+      return { isLive, question: isLive ? '哪些是有生命的？' : '哪些是没有生命的？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isLive ? answer.live : !answer.live; }
+  },
+  'hard-soft': {
+    generateQuestion() {
+      const items = [
+        { name: '石头', icon: '🪨', hard: true },
+        { name: '棉花', icon: '☁️', hard: false },
+        { name: '木头', icon: '🪵', hard: true },
+        { name: '海绵', icon: '🧽', hard: false }
+      ];
+      const isHard = Math.random() > 0.5;
+      return { isHard, question: isHard ? '哪些是硬的？' : '哪些是软的？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isHard ? answer.hard : !answer.hard; }
+  },
+  'smooth-rough': {
+    generateQuestion() {
+      const items = [
+        { name: '镜子', icon: '🪞', smooth: true },
+        { name: '砂纸', icon: '📄', smooth: false },
+        { name: '丝绸', icon: '🧣', smooth: true },
+        { name: '砖头', icon: '🧱', smooth: false }
+      ];
+      const isSmooth = Math.random() > 0.5;
+      return { isSmooth, question: isSmooth ? '哪些是光滑的？' : '哪些是粗糙的？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isSmooth ? answer.smooth : !answer.smooth; }
+  },
+  'open-close': {
+    generateQuestion() {
+      const states = [
+        { name: '开门', icon: '🚪', open: true },
+        { name: '关门', icon: '🚪', open: false },
+        { name: '开灯', icon: '💡', open: true },
+        { name: '关灯', icon: '💡', open: false }
+      ];
+      const target = states[Math.floor(Math.random() * states.length)];
+      return { target, question: `点击${target.name}`, options: states };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'full-empty': {
+    generateQuestion() {
+      const items = [
+        { name: '满杯水', icon: '🥤', full: true },
+        { name: '空杯子', icon: '🥤', full: false }
+      ];
+      const isFull = Math.random() > 0.5;
+      return { isFull, question: isFull ? '哪个是满的？' : '哪个是空的？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isFull ? answer.full : !answer.full; }
+  },
+  'move-static': {
+    generateQuestion() {
+      const items = [
+        { name: '跑步的人', icon: '🏃', moving: true },
+        { name: '静止的树', icon: '🌳', moving: false },
+        { name: '汽车', icon: '🚗', moving: true },
+        { name: '房子', icon: '🏠', moving: false }
+      ];
+      const isMoving = Math.random() > 0.5;
+      return { isMoving, question: isMoving ? '哪个在动？' : '哪个是静止的？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isMoving ? answer.moving : !answer.moving; }
+  },
+  'same-group': {
+    generateQuestion() {
+      const groups = [
+        { name: '颜色', items: ['红','黄','蓝'] },
+        { name: '动物', items: ['狗','猫','鸟'] }
+      ];
+      const g = groups[Math.floor(Math.random() * groups.length)];
+      return { group: g, question: `哪些属于${g.name}？`, options: groups };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.group.name; }
+  },
+  'what-matter': {
+    generateQuestion() {
+      const items = [
+        { name: '苹果', icon: '🍎' }, { name: '汽车', icon: '🚗' },
+        { name: '花', icon: '🌸' }, { name: '飞机', icon: '✈️' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `这是什么？`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'where-go': {
+    generateQuestion() {
+      const places = [
+        { name: '回家', icon: '🏠', place: '家' },
+        { name: '去学校', icon: '🏫', place: '学校' },
+        { name: '去医院', icon: '🏥', place: '医院' },
+        { name: '去公园', icon: '🌳', place: '公园' }
+      ];
+      const target = places[Math.floor(Math.random() * places.length)];
+      return { target, question: `${target.name}去哪里？`, options: places };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.place === q.target.place; }
+  },
+  'feeling': {
+    generateQuestion() {
+      const feelings = [
+        { name: '开心', icon: '😊' }, { name: '难过', icon: '😢' },
+        { name: '生气', icon: '😠' }, { name: '害怕', icon: '😨' }
+      ];
+      const target = feelings[Math.floor(Math.random() * feelings.length)];
+      return { target, question: `这是什么感觉？`, options: feelings };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'color-sort': {
+    generateQuestion() {
+      const colors = ['🔴','🔵','🟡','🔴','🔵','🟡'];
+      const target = Math.random() > 0.5 ? '🔴' : '🔵';
+      return { colors, target, question: `找出所有红色`, options: ['🔴','🔵','🟡'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
   }
 };
 
