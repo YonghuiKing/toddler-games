@@ -139,6 +139,68 @@
         return;
       }
       
+      if (gid === 'find-diff') {
+        const grid = document.createElement('div');
+        grid.className = 'items-row';
+        grid.style.gap = '15px';
+        q.items.forEach((item, i) => {
+          grid.innerHTML += `<span class="item-display" style="cursor:pointer" onclick="checkAnswer('${item}')">${item}</span>`;
+        });
+        container.appendChild(grid);
+        return;
+      }
+      
+      if (gid === 'bigger-smaller') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.style.gap = '50px';
+        wrap.innerHTML = `
+          <button class="game-option" onclick="checkAnswer(${q.a})" style="font-size:80px">${q.a}</button>
+          <button class="game-option" onclick="checkAnswer(${q.b})" style="font-size:80px">${q.b}</button>
+        `;
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'same-diff') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.innerHTML = `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
+            <span style="font-size:80px">${q.icon1}${q.icon2}</span>
+            <div style="display:flex;gap:20px">
+              <button class="btn btn-primary" onclick="checkAnswer(true)">一样 ✓</button>
+              <button class="btn btn-secondary" onclick="checkAnswer(false)">不一样 ✗</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'sequence') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.style.flexDirection = 'column';
+        wrap.style.gap = '20px';
+        // 显示序列
+        const seqDiv = document.createElement('div');
+        seqDiv.className = 'items-row';
+        seqDiv.style.gap = '10px';
+        seqDiv.style.fontSize = '50px';
+        q.pattern.forEach(p => { seqDiv.innerHTML += p === '?' ? '<span style="color:#FF6B6B">?</span>' : p; });
+        wrap.appendChild(seqDiv);
+        // 选项
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.options.forEach(opt => {
+          optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer('${opt}')" style="width:100px;height:100px;font-size:50px">${opt}</button>`;
+        });
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
       const wrap = document.createElement('div');
       wrap.className = 'options-grid';
       q.options.forEach(opt => {

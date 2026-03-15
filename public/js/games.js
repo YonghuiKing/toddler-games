@@ -10,6 +10,16 @@ const GAMES = [
   { id: 'weather', name: '天气认知', icon: '☁️', age: '1-2岁', color: '#74B9FF', color2: '#A3D1FF' },
   { id: 'animal-sound', name: '动物叫声', icon: '🐾', age: '1-2岁', color: '#E17055', color2: '#FF8A65' },
   { id: 'fruit-memory', name: '水果记忆', icon: '🧠', age: '2-3岁', color: '#00CEC9', color2: '#55EFC4' },
+  { id: 'number-learn', name: '认识数字', icon: '1️⃣', age: '2-3岁', color: '#6C5CE7', color2: '#A29BFE' },
+  { id: 'vehicle', name: '认识车辆', icon: '🚗', age: '1-2岁', color: '#E84393', color2: '#FD79A8' },
+  { id: 'food-category', name: '食物分类', icon: '🥗', age: '2-3岁', color: '#00B894', color2: '#55EFC4' },
+  { id: 'emotion', name: '表情识别', icon: '😊', age: '1-2岁', color: '#FDCB6E', color2: '#FFE066' },
+  { id: 'body-parts', name: '身体部位', icon: '🧑', age: '1-2岁', color: '#0984E3', color2: '#74B9FF' },
+  { id: 'time-day', name: '白天黑夜', icon: '🌞', age: '2-3岁', color: '#2D3436', color2: '#636E72' },
+  { id: 'find-diff', name: '找不同', icon: '🔍', age: '2-3岁', color: '#D63031', color2: '#FF7675' },
+  { id: 'bigger-smaller', name: '最大最小', icon: '📏', age: '2-3岁', color: '#E17055', color2: '#FAB1A0' },
+  { id: 'same-diff', name: '相同不同', icon: '⚖️', age: '2-3岁', color: '#00CEC9', color2: '#81ECEC' },
+  { id: 'sequence', name: '找规律', icon: '📋', age: '3岁', color: '#A29BFE', color2: '#B2BEC3' },
 ];
 
 // 语音
@@ -162,6 +172,143 @@ const GameLogic = {
     },
     speakQuestion(q) { speak(q.question); },
     check(answer, q) { return true; }
+  },
+  'number-learn': {
+    generateQuestion() {
+      const nums = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣'];
+      const numNames = ['一','二','三','四','五'];
+      const idx = Math.floor(Math.random() * 5);
+      const target = { icon: nums[idx], name: numNames[idx], val: idx + 1 };
+      const options = [target, ...nums.map((n,i) => ({icon:n,name:numNames[i],val:i+1})).filter(x=>x.val!==target.val).sort(()=>Math.random()-0.5).slice(0,3)].sort(()=>Math.random()-0.5);
+      return { target, options, question: `找出数字${target.val}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.val === q.target.val; }
+  },
+  'vehicle': {
+    generateQuestion() {
+      const vehicles = [
+        { name: '汽车', icon: '🚗' }, { name: '公交车', icon: '🚌' },
+        { name: '出租车', icon: '🚕' }, { name: '摩托车', icon: '🏍️' },
+        { name: '自行车', icon: '🚲' }, { name: '火车', icon: '🚂' }
+      ];
+      const target = vehicles[Math.floor(Math.random() * vehicles.length)];
+      const options = [...vehicles].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'food-category': {
+    generateQuestion() {
+      const foods = [
+        { name: '米饭', icon: '🍚', category: '主食' },
+        { name: '面条', icon: '🍜', category: '主食' },
+        { name: '苹果', icon: '🍎', category: '水果' },
+        { name: '香蕉', icon: '🍌', category: '水果' },
+        { name: '胡萝卜', icon: '🥕', category: '蔬菜' },
+        { name: '西兰花', icon: '🥦', category: '蔬菜' }
+      ];
+      const cats = ['主食', '水果', '蔬菜'];
+      const cat = cats[Math.floor(Math.random() * cats.length)];
+      const target = foods.filter(f => f.category === cat)[Math.floor(Math.random() * foods.filter(f => f.category === cat).length)];
+      const options = [...foods].sort(() => Math.random() - 0.5);
+      return { target, options, category: cat, question: `点击${cat}` };
+    },
+    speakQuestion(q) { speak(`点击${q.category}类的食物`); },
+    check(answer, q) { return answer.category === q.category; }
+  },
+  'emotion': {
+    generateQuestion() {
+      const emotions = [
+        { name: '开心', icon: '😊' }, { name: '难过', icon: '😢' },
+        { name: '生气', icon: '😠' }, { name: '害怕', icon: '😨' },
+        { name: '惊讶', icon: '😲' }, { name: '困', icon: '😴' }
+      ];
+      const target = emotions[Math.floor(Math.random() * emotions.length)];
+      const options = [...emotions].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}的表情` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'body-parts': {
+    generateQuestion() {
+      const parts = [
+        { name: '眼睛', icon: '👀' }, { name: '耳朵', icon: '👂' },
+        { name: '鼻子', icon: '👃' }, { name: '嘴巴', icon: '👄' },
+        { name: '手', icon: '✋' }, { name: '脚', icon: '🦶' }
+      ];
+      const target = parts[Math.floor(Math.random() * parts.length)];
+      const options = [...parts].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'time-day': {
+    generateQuestion() {
+      const times = [
+        { name: '白天', icon: '🌞' }, { name: '黑夜', icon: '🌙' },
+        { name: '早上', icon: '🌅' }, { name: '晚上', icon: '🌃' }
+      ];
+      const target = times[Math.floor(Math.random() * times.length)];
+      const options = [...times].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'find-diff': {
+    generateQuestion() {
+      const icons = ['⭐','❤️','🌸','🎈','🎀','🍭'];
+      const idx = Math.floor(Math.random() * icons.length);
+      const diffIdx = (idx + 1) % icons.length;
+      const base = Array(6).fill(icons[idx]);
+      base[Math.floor(Math.random()*6)] = icons[diffIdx];
+      return { items: base, target: icons[diffIdx], question: '找出一个不同的' };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'bigger-smaller': {
+    generateQuestion() {
+      const nums = [1,2,3,4,5,6,7,8,9,10];
+      const a = nums[Math.floor(Math.random()*10)];
+      const b = nums[Math.floor(Math.random()*10)];
+      const askBig = Math.random() > 0.5;
+      return { a, b, askBig, question: askBig ? `哪个数字更大？` : `哪个数字更小？`, correct: askBig ? (a>b?a:b) : (a<b?a:b) };
+    },
+    speakQuestion(q) { speak(`数字${q.a}和${q.b}，${q.question}`); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'same-diff': {
+    generateQuestion() {
+      const pairs = [
+        { icon1: '🍎', icon2: '🍎', same: true },
+        { icon1: '🍎', icon2: '🍊', same: false },
+        { icon1: '🐶', icon2: '🐶', same: true },
+        { icon1: '🐶', icon2: '🐱', same: false }
+      ];
+      const pair = pairs[Math.floor(Math.random() * pairs.length)];
+      return { ...pair, question: pair.same ? '这两个一样吗？' : '这两个一样吗？', correct: pair.same };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'sequence': {
+    generateQuestion() {
+      const seqs = [
+        { pattern: ['🔴','🔴','🔴','?'], answer: '🔴' },
+        { pattern: ['🔴','🔴','🟡','?'], answer: '🟡' },
+        { pattern: ['⭐','⭐','⭐','?'], answer: '⭐' },
+        { pattern: ['❤️','❤️','❤️','?'], answer: '❤️' }
+      ];
+      const s = seqs[Math.floor(Math.random()*seqs.length)];
+      return { ...s, question: '找规律，下一个是什么？', options: ['🔴','🟡','⭐','❤️'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.answer; }
   }
 };
 
