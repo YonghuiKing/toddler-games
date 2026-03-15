@@ -20,6 +20,24 @@ const GAMES = [
   { id: 'bigger-smaller', name: '最大最小', icon: '📏', age: '2-3岁', color: '#E17055', color2: '#FAB1A0' },
   { id: 'same-diff', name: '相同不同', icon: '⚖️', age: '2-3岁', color: '#00CEC9', color2: '#81ECEC' },
   { id: 'sequence', name: '找规律', icon: '📋', age: '3岁', color: '#A29BFE', color2: '#B2BEC3' },
+  { id: 'nature', name: '认识自然', icon: '🌳', age: '1-2岁', color: '#27AE60', color2: '#58D68D' },
+  { id: 'clothing', name: '认识衣物', icon: '👕', age: '1-2岁', color: '#8E44AD', color2: '#A569BD' },
+  { id: 'occupation', name: '职业认知', icon: '👮', age: '2-3岁', color: '#C0392B', color2: '#E74C3C' },
+  { id: 'color-mix', name: '颜色混合', icon: '🎨', age: '2-3岁', color: '#E67E22', color2: '#F39C12' },
+  { id: 'size-order', name: '大小排序', icon: '📊', age: '2-3岁', color: '#16A085', color2: '#1ABC9C' },
+  { id: 'shadow', name: '影子匹配', icon: '👤', age: '2-3岁', color: '#34495E', color2: '#5D6D7E' },
+  { id: 'odd-one', name: '找出另类', icon: '❓', age: '2-3岁', color: '#D35400', color2: '#E59866' },
+  { id: 'complete-pic', name: '补全图案', icon: '🧩', age: '2-3岁', color: '#9B59B6', color2: '#BB8FCE' },
+  { id: 'direction-turn', name: '转身游戏', icon: '🔄', age: '2-3岁', color: '#1ABC9C', color2: '#48C9B0' },
+  { id: 'more-less', name: '多与少', icon: '🔢', age: '2-3岁', color: '#F1C40F', color2: '#F4D03F' },
+  { id: 'position', name: '位置认知', icon: '📍', age: '2-3岁', color: '#E74C3C', color2: '#EC7063' },
+  { id: 'coin', name: '认识钱币', icon: '💰', age: '3岁', color: '#F39C12', color2: '#F7DC6F' },
+  { id: 'month', name: '认识月份', icon: '📅', age: '3岁', color: '#3498DB', color2: '#5DADE2' },
+  { id: 'weekday', name: '认识星期', icon: '📆', age: '3岁', color: '#9B59B6', color2: '#AF7AC5' },
+  { id: 'rhyme', name: '念儿歌', icon: '🎵', age: '1-2岁', color: '#1ABC9C', color2: '#48C9B0' },
+  { id: 'instrument', name: '乐器认知', icon: '🎹', age: '1-2岁', color: '#8E44AD', color2: '#A569BD' },
+  { id: 'opposite', name: '反义词', icon: '🔄', age: '2-3岁', color: '#E67E22', color2: '#F5B041' },
+  { id: 'category', name: '分类游戏', icon: '📂', age: '2-3岁', color: '#2E86C1', color2: '#5DADE2' },
 ];
 
 // 语音
@@ -309,6 +327,237 @@ const GameLogic = {
     },
     speakQuestion(q) { speak(q.question); },
     check(answer, q) { return answer === q.answer; }
+  },
+  'nature': {
+    generateQuestion() {
+      const items = [
+        { name: '大树', icon: '🌳' }, { name: '小花', icon: '🌸' },
+        { name: '小草', icon: '🌱' }, { name: '太阳', icon: '☀️' },
+        { name: '月亮', icon: '🌙' }, { name: '星星', icon: '⭐' },
+        { name: '云朵', icon: '☁️' }, { name: '山', icon: '⛰️' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      const options = [...items].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'clothing': {
+    generateQuestion() {
+      const items = [
+        { name: '衣服', icon: '👕' }, { name: '裤子', icon: '👖' },
+        { name: '鞋子', icon: '👟' }, { name: '帽子', icon: '🧢' },
+        { name: '袜子', icon: '🧦' }, { name: '裙子', icon: '👗' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      const options = [...items].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'occupation': {
+    generateQuestion() {
+      const jobs = [
+        { name: '警察', icon: '👮' }, { name: '医生', icon: '👨‍⚕️' },
+        { name: '老师', icon: '👨‍🏫' }, { name: '厨师', icon: '👨‍🍳' },
+        { name: '农民', icon: '👨‍🌾' }, { name: '司机', icon: '🚗' }
+      ];
+      const target = jobs[Math.floor(Math.random() * jobs.length)];
+      const options = [...jobs].sort(() => Math.random() - 0.5);
+      return { target, options, question: `点击${target.name}` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'color-mix': {
+    generateQuestion() {
+      const mixes = [
+        { name: '红色+黄色=橙色', result: '🟠', colors: ['🔴','🟡'] },
+        { name: '蓝色+黄色=绿色', result: '🟢', colors: ['🔵','🟡'] },
+        { name: '红色+蓝色=紫色', result: '🟣', colors: ['🔴','🔵'] }
+      ];
+      const m = mixes[Math.floor(Math.random() * mixes.length)];
+      return { ...m, question: `${m.name}是什么颜色？`, options: mixes.map(x=>x.result) };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.result; }
+  },
+  'size-order': {
+    generateQuestion() {
+      const items = [
+        { name: '大苹果', icon: '🍎', size: 3 },
+        { name: '中苹果', icon: '🍎', size: 2 },
+        { name: '小苹果', icon: '🍎', size: 1 }
+      ];
+      return { items, question: '从小到大排列', correct: [1,2,3] };
+    },
+    speakQuestion(q) { speak('从小到大点击'); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'shadow': {
+    generateQuestion() {
+      const items = [
+        { name: '猫', icon: '🐱', shadow: '🐈' },
+        { name: '狗', icon: '🐕', shadow: '🐕‍🦺' },
+        { name: '鸟', icon: '🐦', shadow: '🐤' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      const others = items.filter(i => i.name !== target.name);
+      const options = [target.shadow, ...others.map(o => o.shadow)].sort(() => Math.random() - 0.5);
+      return { target, options, question: `哪个是${target.name}的影子？` };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target.shadow; }
+  },
+  'odd-one': {
+    generateQuestion() {
+      const sets = [
+        { items: ['🍎','🍎','🍎','🍊'], target: '🍊' },
+        { items: ['🐶','🐶','🐶','🐱'], target: '🐱' },
+        { items: ['⭐','⭐','⭐','🌙'], target: '🌙' }
+      ];
+      const s = sets[Math.floor(Math.random() * sets.length)];
+      return { ...s, question: '找出一个不同的' };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'complete-pic': {
+    generateQuestion() {
+      const pics = [
+        { name: '苹果', full: '🍎', missing: '🍏' },
+        { name: '笑脸', full: '😊', missing: '☺️' }
+      ];
+      const p = pics[Math.floor(Math.random() * pics.length)];
+      return { ...p, question: `补全${p.name}`, options: [p.full, p.missing, '🍎', '🍊'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.full; }
+  },
+  'direction-turn': {
+    generateQuestion() {
+      const from = ['⬆️','⬇️','⬅️','➡️'];
+      const to = ['⬇️','⬆️','➡️','⬅️'];
+      const idx = Math.floor(Math.random() * 4);
+      return { from: from[idx], to: to[idx], question: '转身后会变成什么？', options: to };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.to; }
+  },
+  'more-less': {
+    generateQuestion() {
+      const a = Math.floor(Math.random() * 5) + 1;
+      const b = a + Math.floor(Math.random() * 3) + 1;
+      const more = Math.random() > 0.5;
+      return { a, b, more, question: more ? `哪个更多？` : `哪个更少？`, correct: more ? b : a };
+    },
+    speakQuestion(q) { speak(`${q.a}和${q.b}，${q.question}`); },
+    check(answer, q) { return answer === q.correct; }
+  },
+  'position': {
+    generateQuestion() {
+      const items = [
+        { name: '上面', icon: '⬆️' }, { name: '下面', icon: '⬇️' },
+        { name: '前面', icon: '👆' }, { name: '后面', icon: '👇' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `什么是${target.name}？`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'coin': {
+    generateQuestion() {
+      const coins = [
+        { name: '1分钱', icon: '🪙', val: 1 },
+        { name: '5分钱', icon: '🪙', val: 5 },
+        { name: '1块钱', icon: '🪙', val: 10 },
+        { name: '5块钱', icon: '🪙', val: 50 }
+      ];
+      const target = coins[Math.floor(Math.random() * coins.length)];
+      return { target, question: `这是多少钱？`, options: coins };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.val === q.target.val; }
+  },
+  'month': {
+    generateQuestion() {
+      const months = [
+        { name: '一月', icon: '❄️' }, { name: '二月', icon: '🌸' },
+        { name: '三月', icon: '🌷' }, { name: '四月', icon: '🌺' }
+      ];
+      const target = months[Math.floor(Math.random() * months.length)];
+      return { target, question: `点击${target.name}`, options: months };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'weekday': {
+    generateQuestion() {
+      const days = [
+        { name: '周一', icon: '1️⃣' }, { name: '周二', icon: '2️⃣' },
+        { name: '周三', icon: '3️⃣' }, { name: '周四', icon: '4️⃣' },
+        { name: '周五', icon: '5️⃣' }, { name: '周六', icon: '6️⃣' },
+        { name: '周日', icon: '0️⃣' }
+      ];
+      const target = days[Math.floor(Math.random() * days.length)];
+      return { target, question: `点击${target.name}`, options: days };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'rhyme': {
+    generateQuestion() {
+      const rhymes = [
+        { name: '小白兔', icon: '🐰', lyric: '小白兔，白又白' },
+        { name: '小星星', icon: '⭐', lyric: '一闪一闪亮晶晶' }
+      ];
+      const target = rhymes[Math.floor(Math.random() * rhymes.length)];
+      return { target, question: `听儿歌：${target.lyric}`, options: rhymes };
+    },
+    speakQuestion(q) { speak(q.lyric + '，是什么动物？'); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'instrument': {
+    generateQuestion() {
+      const inst = [
+        { name: '钢琴', icon: '🎹' }, { name: '吉他', icon: '🎸' },
+        { name: '小提琴', icon: '🎻' }, { name: '鼓', icon: '🥁' }
+      ];
+      const target = inst[Math.floor(Math.random() * inst.length)];
+      return { target, question: `点击${target.name}`, options: inst };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'opposite': {
+    generateQuestion() {
+      const ops = [
+        { name: '大', icon: '🐘', opp: '小', oppIcon: '🐜' },
+        { name: '高', icon: '🏢', opp: '低', oppIcon: '🏠' },
+        { name: '快', icon: '🚀', opp: '慢', oppIcon: '🐢' },
+        { name: '热', icon: '🔥', opp: '冷', oppIcon: '🧊' }
+      ];
+      const o = ops[Math.floor(Math.random() * ops.length)];
+      return { word: o.name, answer: o.opp, question: `${o.name}的反义词是什么？`, options: ops.map(x=>x.opp) };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.answer; }
+  },
+  'category': {
+    generateQuestion() {
+      const cats = [
+        { name: '交通工具', items: ['🚗','🚌','🚂','✈️'] },
+        { name: '水果', items: ['🍎','🍊','🍌','🍇'] },
+        { name: '动物', items: ['🐶','🐱','🐰','🐼'] }
+      ];
+      const cat = cats[Math.floor(Math.random() * cats.length)];
+      return { cat, question: `哪些是${cat.name}？`, items: cat.items, options: cats };
+    },
+    speakQuestion(q) { speak(`点击${q.cat.name}`); },
+    check(answer, q) { return answer.name === q.cat.name; }
   }
 };
 

@@ -183,19 +183,142 @@
         wrap.className = 'options-grid';
         wrap.style.flexDirection = 'column';
         wrap.style.gap = '20px';
-        // 显示序列
         const seqDiv = document.createElement('div');
         seqDiv.className = 'items-row';
         seqDiv.style.gap = '10px';
         seqDiv.style.fontSize = '50px';
         q.pattern.forEach(p => { seqDiv.innerHTML += p === '?' ? '<span style="color:#FF6B6B">?</span>' : p; });
         wrap.appendChild(seqDiv);
-        // 选项
         const optsDiv = document.createElement('div');
         optsDiv.className = 'options-grid';
         q.options.forEach(opt => {
           optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer('${opt}')" style="width:100px;height:100px;font-size:50px">${opt}</button>`;
         });
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'color-mix') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.innerHTML = `<div style="display:flex;gap:30px;font-size:50px;margin-bottom:30px">${q.colors[0]}+${q.colors[1]}=？</div>`;
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.options.forEach(opt => {
+          optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer('${opt}')">${opt}</button>`;
+        });
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'direction-turn') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.innerHTML = `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:30px">
+            <span style="font-size:80px">${q.from} ➡️ ？</span>
+            <div class="options-grid">
+              ${q.options.map(o => `<button class="game-option" onclick="checkAnswer('${o}')" style="width:100px;height:100px;font-size:50px">${o}</button>`).join('')}
+            </div>
+          </div>
+        `;
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'bigger-smaller' || gid === 'more-less') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.style.gap = '50px';
+        wrap.innerHTML = `
+          <button class="game-option" onclick="checkAnswer(${q.a})" style="font-size:80px">${q.a}</button>
+          <button class="game-option" onclick="checkAnswer(${q.b})" style="font-size:80px">${q.b}</button>
+        `;
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'odd-one' || gid === 'find-diff') {
+        const grid = document.createElement('div');
+        grid.className = 'items-row';
+        grid.style.gap = '15px';
+        q.items.forEach((item, i) => {
+          grid.innerHTML += `<span class="item-display" style="cursor:pointer" onclick="checkAnswer('${item}')">${item}</span>`;
+        });
+        container.appendChild(grid);
+        return;
+      }
+      
+      if (gid === 'rhyme') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.options.forEach(opt => {
+          optsDiv.innerHTML += `<button class="game-option" onclick='checkAnswer(${JSON.stringify(opt).replace(/"/g,"&quot;")})'>${opt.icon}</button>`;
+        });
+        wrap.innerHTML = `<div style="text-align:center;font-size:28px;margin-bottom:30px">${q.lyric}</div>`;
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'opposite') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.innerHTML = `<div style="font-size:40px;margin-bottom:30px">${q.question}</div>`;
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.options.forEach(opt => {
+          optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer('${opt}')" style="font-size:30px">${opt}</button>`;
+        });
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'size-order') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.style.flexDirection = 'column';
+        wrap.style.gap = '20px';
+        wrap.innerHTML = `<div style="font-size:28px">点击从小到大</div>`;
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.items.forEach(item => {
+          const size = 0.5 + item.size * 0.3;
+          optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer(${item.size})" style="transform:scale(${size});font-size:40px">${item.icon}</button>`;
+        });
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'shadow') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        wrap.innerHTML = `<div style="font-size:60px;margin-bottom:20px">${q.target.icon} 的影子是？</div>`;
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.options.forEach(opt => {
+          optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer('${opt}')" style="font-size:40px;opacity:0.7">${opt}</button>`;
+        });
+        wrap.appendChild(optsDiv);
+        container.appendChild(wrap);
+        return;
+      }
+      
+      if (gid === 'complete-pic') {
+        const wrap = document.createElement('div');
+        wrap.className = 'options-grid';
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+        q.options.forEach(opt => {
+          optsDiv.innerHTML += `<button class="game-option" onclick="checkAnswer('${opt}')" style="font-size:50px">${opt}</button>`;
+        });
+        wrap.innerHTML = `<div style="font-size:28px;margin-bottom:20px">哪个图案是完整的？</div>`;
         wrap.appendChild(optsDiv);
         container.appendChild(wrap);
         return;
