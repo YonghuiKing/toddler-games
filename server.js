@@ -8,6 +8,9 @@ const PORT = 3000;
 const users = new Map();
 let currentUser = null;
 
+// 记录每个请求是否已响应
+const activeResponses = new Set();
+
 const mimeTypes = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -19,21 +22,38 @@ const mimeTypes = {
 };
 
 function parseBody(req) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
-      try { resolve(body ? JSON.parse(body) : {}); }
-      catch (e) { resolve({}); }
+      try { 
+        resolve(body ? JSON.parse(body) : {}); 
+      } catch (e) { 
+        resolve({}); 
+      }
     });
-    req.on('error', reject);
+    req.on('error', () => resolve({}));
   });
+}
+
+// 安全响应函数 - 防止重复发送
+function safeResponse(res, statusCode, data) {
+  const key = `${res.socket.remoteAddress}:${res.socket.remotePort}`;
+  if (activeResponses.has(key)) {
+    return false;
+  }
+  activeResponses.add(key);
+  res.on('finish', () => activeResponses.delete(key));
+  res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(data));
+  return true;
 }
 
 async function handleApi(req, res) {
   const url = req.url.split('?')[0];
   const method = req.method;
   
+  // 设置CORS头
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -44,24 +64,19 @@ async function handleApi(req, res) {
     return;
   }
 
-  res.setHeader('Content-Type', 'application/json');
-
   // 注册
   if (url === '/api/register' && method === 'POST') {
     const { username, password } = await parseBody(req);
     if (!username || !password) {
-      res.writeHead(400);
-      res.end(JSON.stringify({ success: false, message: '请填写完整信息' }));
+      safeResponse(res, 400, { success: false, message: '请填写完整信息' });
       return;
     }
     if (users.has(username)) {
-      res.writeHead(400);
-      res.end(JSON.stringify({ success: false, message: '用户名已存在' }));
+      safeResponse(res, 400, { success: false, message: '用户名已存在' });
       return;
     }
     users.set(username, { password, score: 0, createdAt: new Date().toISOString() });
-    res.writeHead(200);
-    res.end(JSON.stringify({ success: true, message: '注册成功' }));
+    safeResponse(res, 200, { success: true, message: '注册成功' });
     return;
   }
 
@@ -70,13 +85,11 @@ async function handleApi(req, res) {
     const { username, password } = await parseBody(req);
     const user = users.get(username);
     if (!user || user.password !== password) {
-      res.writeHead(401);
-      res.end(JSON.stringify({ success: false, message: '用户名或密码错误' }));
+      safeResponse(res, 401, { success: false, message: '用户名或密码错误' });
       return;
     }
     currentUser = username;
-    res.writeHead(200);
-    res.end(JSON.stringify({ success: true, username, score: user.score }));
+    safeResponse(res, 200, { success: true, username, score: user.score });
     return;
   }
 
@@ -84,11 +97,9 @@ async function handleApi(req, res) {
   if (url === '/api/user' && method === 'GET') {
     if (currentUser) {
       const user = users.get(currentUser);
-      res.writeHead(200);
-      res.end(JSON.stringify({ username: currentUser, score: user?.score || 0 }));
+      safeResponse(res, 200, { username: currentUser, score: user?.score || 0 });
     } else {
-      res.writeHead(200);
-      res.end(JSON.stringify({ username: null }));
+      safeResponse(res, 200, { username: null });
     }
     return;
   }
@@ -96,8 +107,7 @@ async function handleApi(req, res) {
   // 登出
   if (url === '/api/logout' && method === 'POST') {
     currentUser = null;
-    res.writeHead(200);
-    res.end(JSON.stringify({ success: true }));
+    safeResponse(res, 200, { success: true });
     return;
   }
 
@@ -108,13 +118,11 @@ async function handleApi(req, res) {
       const user = users.get(username);
       user.score = (user.score || 0) + score;
     }
-    res.writeHead(200);
-    res.end(JSON.stringify({ success: true }));
+    safeResponse(res, 200, { success: true });
     return;
   }
 
-  res.writeHead(404);
-  res.end(JSON.stringify({ error: 'Not Found' }));
+  safeResponse(res, 404, { error: 'Not Found' });
 }
 
 function serveStatic(req, res) {
@@ -129,10 +137,18 @@ function serveStatic(req, res) {
     if (err) {
       if (err.code === 'ENOENT') {
         fs.readFile(path.join(__dirname, 'public', 'index.html'), (err2, content2) => {
-          if (err2) { res.writeHead(404); res.end('Not Found'); }
-          else { res.writeHead(200, { 'Content-Type': 'text/html' }); res.end(content2); }
+          if (err2) { 
+            res.writeHead(404); 
+            res.end('Not Found'); 
+          } else { 
+            res.writeHead(200, { 'Content-Type': 'text/html' }); 
+            res.end(content2); 
+          }
         });
-      } else { res.writeHead(500); res.end('Server Error'); }
+      } else { 
+        res.writeHead(500); 
+        res.end('Server Error'); 
+      }
     } else {
       res.writeHead(200, { 'Content-Type': contentType });
       res.end(content);
@@ -141,8 +157,17 @@ function serveStatic(req, res) {
 }
 
 const server = http.createServer((req, res) => {
-  if (req.url.startsWith('/api/')) { handleApi(req, res); return; }
-  serveStatic(req, res);
+  try {
+    if (req.url.startsWith('/api/')) { 
+      handleApi(req, res); 
+      return; 
+    }
+    serveStatic(req, res);
+  } catch (e) {
+    console.error('Server error:', e);
+    res.writeHead(500);
+    res.end('Server Error');
+  }
 });
 
 server.listen(PORT, () => {
