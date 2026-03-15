@@ -2,6 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   renderGameCards();
   checkUserStatus();
+  // 显示游戏总数
+  document.getElementById('totalGames').textContent = GAMES.length;
 });
 
 function renderGameCards() {

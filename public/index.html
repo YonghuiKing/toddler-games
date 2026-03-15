@@ -12,6 +12,7 @@
     <header class="header">
       <h1>🎈 幼儿游戏乐园 🎈</h1>
       <p class="subtitle">和爸爸妈妈一起玩游戏吧！</p>
+      <p class="game-count">共有 <span id="totalGames">0</span> 款游戏等你来玩！</p>
     </header>
 
     <nav class="user-nav">
@@ -56,6 +57,25 @@
   </div>
 
   <script src="/js/games.js"></script>
+  <script>
+    // 页面加载欢迎语音
+    document.addEventListener('DOMContentLoaded', () => {
+      // 延迟播放欢迎语音
+      setTimeout(() => {
+        if ('speechSynthesis' in window) {
+          const msgs = [
+            '欢迎来到幼儿游戏乐园！这里有很多有趣的游戏，快来玩吧！',
+            '你好！欢迎来玩游戏，这里有好多好玩的游戏哦！',
+            '欢迎欢迎！这里有各种有趣的小游戏，快选择一个开始吧！'
+          ];
+          const msg = new SpeechSynthesisUtterance(msgs[Math.floor(Math.random() * msgs.length)]);
+          msg.lang = 'zh-CN';
+          msg.rate = 0.9;
+          window.speechSynthesis.speak(msg);
+        }
+      }, 1000);
+    });
+  </script>
   <script src="/js/app.js"></script>
 </body>
 </html>
