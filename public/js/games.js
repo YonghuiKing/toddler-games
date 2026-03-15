@@ -72,6 +72,44 @@ const GAMES = [
   { id: 'where-go', name: '去哪里', icon: '🏠', age: '2-3岁', color: '#009688', color2: '#80CBC4' },
   { id: 'feeling', name: '感觉认知', icon: '💓', age: '1-2岁', color: '#F06292', color2: '#F8BBD0' },
   { id: 'color-sort', name: '颜色排序', icon: '🔴', age: '2-3岁', color: '#F44336', color2: '#EF9A9A' },
+  { id: 'shape-build', name: '搭积木', icon: '🧱', age: '2-3岁', color: '#795548', color2: '#A1887F' },
+  { id: 'puzzle-2x2', name: '2x2拼图', icon: '🧩', age: '2-3岁', color: '#9C27B0', color2: '#BA68C8' },
+  { id: 'follow-path', name: '走迷宫', icon: '🌀', age: '2-3岁', color: '#00BCD4', color2: '#4DD0E1' },
+  { id: 'tap-order', name: '顺序点击', icon: '🔢', age: '2-3岁', color: '#FF5722', color2: '#FF8A65' },
+  { id: 'memory-card', name: '记忆翻牌', icon: '🃏', age: '2-3岁', color: '#607D8B', color2: '#90A4AE' },
+  { id: 'sound-match', name: '声音配对', icon: '🔊', age: '2-3岁', color: '#FF9800', color2: '#FFB74D' },
+  { id: 'weather-feel', name: '天气感觉', icon: '🌤️', age: '1-2岁', color: '#03A9F4', color2: '#4FC3F7' },
+  { id: 'fruit-taste', name: '水果味道', icon: '🍇', age: '1-2岁', color: '#E91E63', color2: '#F06292' },
+  { id: 'animal-home', name: '动物的家', icon: '🏠', age: '1-2岁', color: '#8BC34A', color2: '#AED581' },
+  { id: 'body-action', name: '身体动作', icon: '🧘', age: '1-2岁', color: '#3F51B5', color2: '#7986CB' },
+  { id: 'count-fingers', name: '数手指', icon: '✋', age: '1-2岁', color: '#FFC107', color2: '#FFD54F' },
+  { id: 'color-blocks', name: '颜色块', icon: '🟥', age: '1-2岁', color: '#F44336', color2: '#EF5350' },
+  { id: 'shape-trace', name: '形状描边', icon: '⬜', age: '2-3岁', color: '#9E9E9E', color2: '#BDBDBD' },
+  { id: 'line-trace', name: '线条描边', icon: '📏', age: '2-3岁', color: '#673AB7', color2: '#9575CD' },
+  { id: 'dot-connect', name: '点连线', icon: '🔗', age: '2-3岁', color: '#009688', color2: '#4DB6AC' },
+  { id: 'find-same-row', name: '同排找相同', icon: '➡️', age: '2-3岁', color: '#FF5722', color2: '#FF7043' },
+  { id: 'count-legs', name: '数腿', icon: '🦵', age: '2-3岁', color: '#795548', color2: '#8D6E63' },
+  { id: 'who-swim', name: '谁会游泳', icon: '🏊', age: '2-3岁', color: '#00BCD4', color2: '#26C6DA' },
+  { id: 'who-fly', name: '谁会飞', icon: '✈️', age: '1-2岁', color: '#03A9F4', color2: '#29B6F6' },
+  { id: 'who-crawl', name: '谁爬行', icon: '🐛', age: '2-3岁', color: '#8BC34A', color2: '#9CCC65' },
+  { id: 'toy-category', name: '玩具分类', icon: '🧸', age: '1-2岁', color: '#E91E63', color2: '#F48FB1' },
+  { id: 'kitchen-items', name: '厨房用品', icon: '🍳', age: '2-3岁', color: '#FF9800', color2: '#FFA726' },
+  { id: 'bathroom', name: '卫生间用品', icon: '🚿', age: '2-3岁', color: '#2196F3', color2: '#42A5F5' },
+  { id: 'room-items', name: '房间物品', icon: '🛏️', age: '1-2岁', color: '#9C27B0', color2: '#AB47BC' },
+  { id: 'outdoor', name: '户外物品', icon: '🌳', age: '1-2岁', color: '#4CAF50', color2: '#66BB6A' },
+  { id: 'transport-speed', name: '交通工具速度', icon: '🚀', age: '2-3岁', color: '#F44336', color2: '#E57373' },
+  { id: 'food-hot-cold', name: '冷食热食', icon: '🍜', age: '1-2岁', color: '#FF5722', color2: '#FF8A65' },
+  { id: 'liquid-solid', name: '液体固体', icon: '💧', age: '2-3岁', color: '#03A9F4', color2: '#4FC3F7' },
+  { id: 'living-room', name: '客厅物品', icon: '🛋️', age: '1-2岁', color: '#795548', color2: '#8D6E63' },
+  { id: 'office', name: '办公室物品', icon: '💼', age: '3岁', color: '#607D8B', color2: '#78909C' },
+  { id: 'garden', name: '花园物品', icon: '🌷', age: '1-2岁', color: '#E91E63', color2: '#EC407A' },
+  { id: 'farm', name: '农场动物', icon: '🐄', age: '1-2岁', color: '#8BC34A', color2: '#AED581' },
+  { id: 'zoo', name: '动物园', icon: '🦁', age: '1-2岁', color: '#FF9800', color2: '#FFB74D' },
+  { id: 'sea-animal', name: '海洋动物', icon: '🐳', age: '1-2岁', color: '#03A9F4', color2: '#29B6F6' },
+  { id: 'insect', name: '昆虫认知', icon: '🐝', age: '2-3岁', color: '#FFC107', color2: '#FFCA28' },
+  { id: 'bird', name: '鸟类认知', icon: '🐦', age: '1-2岁', color: '#4CAF50', color2: '#81C784' },
+  { id: 'pet', name: '宠物认知', icon: '🐕', age: '1-2岁', color: '#9C27B0', color2: '#BA68C8' },
+  { id: 'wild-animal', name: '野生动物', icon: '🦁', age: '2-3岁', color: '#FF5722', color2: '#FF7043' },
 ];
 
 // 语音
@@ -1008,6 +1046,440 @@ const GameLogic = {
     },
     speakQuestion(q) { speak(q.question); },
     check(answer, q) { return answer === q.target; }
+  },
+  'shape-build': {
+    generateQuestion() {
+      const shapes = ['🔴','🟨','🔺','🟩'];
+      const target = shapes[Math.floor(Math.random() * 4)];
+      return { shapes, target, question: `用${target}搭建`, options: shapes };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'puzzle-2x2': {
+    generateQuestion() {
+      const parts = ['🍎','🍊','🍋','🍇'];
+      return { parts, question: '拼完整', options: parts };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.parts.includes(answer); }
+  },
+  'follow-path': {
+    generateQuestion() {
+      const path = ['➡️','➡️','⬇️','⬇️'];
+      return { path, question: '跟着走', options: ['➡️','⬇️','⬅️','⬆️'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.path.includes(answer); }
+  },
+  'tap-order': {
+    generateQuestion() {
+      const nums = [1,2,3,4];
+      return { nums, question: '按顺序点击1234', options: nums };
+    },
+    speakQuestion(q) { speak('按顺序点击1、2、3、4'); },
+    check(answer, q) { return answer === 1; }
+  },
+  'memory-card': {
+    generateQuestion() {
+      const cards = ['🍎','🍊','🍋','🍇','🍎','🍊','🍋','🍇'];
+      return { cards, question: '翻牌配对', options: ['🍎','🍊'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return true; }
+  },
+  'sound-match': {
+    generateQuestion() {
+      const sounds = [
+        { name: '狗叫', icon: '🐶', sound: '汪汪' },
+        { name: '猫叫', icon: '🐱', sound: '喵喵' }
+      ];
+      const target = sounds[Math.floor(Math.random() * sounds.length)];
+      return { target, question: `什么动物${target.sound}？`, options: sounds };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'weather-feel': {
+    generateQuestion() {
+      const weather = [
+        { name: '晴天热', icon: '☀️' },
+        { name: '雨天冷', icon: '🌧️' }
+      ];
+      const target = weather[Math.floor(Math.random() * weather.length)];
+      return { target, question: `这是什么天气感觉？`, options: weather };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'fruit-taste': {
+    generateQuestion() {
+      const fruits = [
+        { name: '苹果', icon: '🍎', taste: '甜' },
+        { name: '柠檬', icon: '🍋', taste: '酸' }
+      ];
+      const target = fruits[Math.floor(Math.random() * fruits.length)];
+      return { target, question: `${target.icon}是什么味道？`, options: fruits };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.taste === q.target.taste; }
+  },
+  'animal-home': {
+    generateQuestion() {
+      const animals = [
+        { name: '小狗', icon: '🐶', home: '狗窝' },
+        { name: '小鸟', icon: '🐦', home: '鸟窝' }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `${target.name}的家在哪里？`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'body-action': {
+    generateQuestion() {
+      const actions = [
+        { name: '举手', icon: '✋' },
+        { name: '拍手', icon: '👏' },
+        { name: '点头', icon: '👤' },
+        { name: '摇头', icon: '🙃' }
+      ];
+      const target = actions[Math.floor(Math.random() * actions.length)];
+      return { target, question: `做${target.name}的动作`, options: actions };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'count-fingers': {
+    generateQuestion() {
+      const count = Math.floor(Math.random() * 5) + 1;
+      return { count, question: `伸出${count}根手指`, options: [1,2,3,4,5] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.count; }
+  },
+  'color-blocks': {
+    generateQuestion() {
+      const blocks = ['🟥','🟦','🟨','🟥','🟦','🟨'];
+      const target = '🟥';
+      return { blocks, target, question: '点击红色块', options: ['🟥','🟦','🟨'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'shape-trace': {
+    generateQuestion() {
+      const shapes = ['⬜','⭕','🔺','◇'];
+      const target = shapes[Math.floor(Math.random() * shapes.length)];
+      return { target, question: `描画${target}`, options: shapes };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'line-trace': {
+    generateQuestion() {
+      const lines = ['直线','曲线','折线'];
+      const target = lines[Math.floor(Math.random() * 3)];
+      return { target, question: `这是什么线？`, options: lines };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'dot-connect': {
+    generateQuestion() {
+      return { dots: 3, question: '把点连起来', options: ['1','2','3'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === '1'; }
+  },
+  'find-same-row': {
+    generateQuestion() {
+      const row = ['🍎','🍊','🍎','🍋'];
+      const target = '🍎';
+      return { row, target, question: '找相同的', options: ['🍎','🍊','🍋'] };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer === q.target; }
+  },
+  'count-legs': {
+    generateQuestion() {
+      const animals = [
+        { name: '小狗', icon: '🐶', legs: 4 },
+        { name: '小鸟', icon: '🐦', legs: 2 }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `${target.name}有几条腿？`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.legs === q.target.legs; }
+  },
+  'who-swim': {
+    generateQuestion() {
+      const animals = [
+        { name: '鱼', icon: '🐟', canSwim: true },
+        { name: '猫', icon: '🐱', canSwim: false }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `谁会游泳？`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.canSwim === q.target.canSwim; }
+  },
+  'who-fly': {
+    generateQuestion() {
+      const animals = [
+        { name: '小鸟', icon: '🐦', canFly: true },
+        { name: '小狗', icon: '🐶', canFly: false }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `谁会飞？`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.canFly === q.target.canFly; }
+  },
+  'who-crawl': {
+    generateQuestion() {
+      const animals = [
+        { name: '毛毛虫', icon: '🐛', canCrawl: true },
+        { name: '兔子', icon: '🐰', canCrawl: false }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `谁会爬行？`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.canCrawl === q.target.canCrawl; }
+  },
+  'toy-category': {
+    generateQuestion() {
+      const toys = [
+        { name: '娃娃', icon: '🧸', type: '毛绒' },
+        { name: '积木', icon: '🧱', type: '拼搭' }
+      ];
+      const target = toys[Math.floor(Math.random() * toys.length)];
+      return { target, question: `${target.name}是什么类型玩具？`, options: toys };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'kitchen-items': {
+    generateQuestion() {
+      const items = [
+        { name: '锅', icon: '🍳' },
+        { name: '碗', icon: '🥣' },
+        { name: '勺子', icon: '🥄' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击厨房用品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'bathroom': {
+    generateQuestion() {
+      const items = [
+        { name: '牙刷', icon: '🪥' },
+        { name: '毛巾', icon: '🧖' },
+        { name: '洗发水', icon: '🧴' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击卫生间用品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'room-items': {
+    generateQuestion() {
+      const items = [
+        { name: '床', icon: '🛏️' },
+        { name: '桌子', icon: '🪑' },
+        { name: '灯', icon: '💡' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击房间物品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'outdoor': {
+    generateQuestion() {
+      const items = [
+        { name: '树', icon: '🌳' },
+        { name: '花', icon: '🌸' },
+        { name: '草', icon: '🌱' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击户外物品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'transport-speed': {
+    generateQuestion() {
+      const trans = [
+        { name: '飞机最快', icon: '✈️', speed: 'fast' },
+        { name: '汽车较快', icon: '🚗', speed: 'medium' },
+        { name: '自行车慢', icon: '🚲', speed: 'slow' }
+      ];
+      const target = trans[Math.floor(Math.random() * trans.length)];
+      return { target, question: `哪个最快？`, options: trans };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'food-hot-cold': {
+    generateQuestion() {
+      const foods = [
+        { name: '热汤', icon: '🍲', hot: true },
+        { name: '冰淇淋', icon: '🍦', hot: false }
+      ];
+      const isHot = Math.random() > 0.5;
+      return { isHot, question: isHot ? '哪些是热的？' : '哪些是冷的？', options: foods };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isHot ? answer.hot : !answer.hot; }
+  },
+  'liquid-solid': {
+    generateQuestion() {
+      const items = [
+        { name: '水', icon: '💧', liquid: true },
+        { name: '冰', icon: '🧊', liquid: false },
+        { name: '果汁', icon: '🧃', liquid: true }
+      ];
+      const isLiquid = Math.random() > 0.5;
+      return { isLiquid, question: isLiquid ? '哪些是液体？' : '哪些是固体？', options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return q.isLiquid ? answer.liquid : !answer.liquid; }
+  },
+  'living-room': {
+    generateQuestion() {
+      const items = [
+        { name: '沙发', icon: '🛋️' },
+        { name: '电视', icon: '📺' },
+        { name: '茶几', icon: '🪵' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击客厅物品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'office': {
+    generateQuestion() {
+      const items = [
+        { name: '电脑', icon: '💻' },
+        { name: '打印机', icon: '🖨️' },
+        { name: '文件夹', icon: '📁' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击办公室物品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'garden': {
+    generateQuestion() {
+      const items = [
+        { name: '花', icon: '🌷' },
+        { name: '草', icon: '🌱' },
+        { name: '蝴蝶', icon: '🦋' }
+      ];
+      const target = items[Math.floor(Math.random() * items.length)];
+      return { target, question: `点击花园物品`, options: items };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'farm': {
+    generateQuestion() {
+      const animals = [
+        { name: '奶牛', icon: '🐄' },
+        { name: '小猪', icon: '🐖' },
+        { name: '马', icon: '🐴' }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `点击农场动物`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'zoo': {
+    generateQuestion() {
+      const animals = [
+        { name: '狮子', icon: '🦁' },
+        { name: '大象', icon: '🐘' },
+        { name: '长颈鹿', icon: '🦒' }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `点击动物园动物`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'sea-animal': {
+    generateQuestion() {
+      const animals = [
+        { name: '鲸鱼', icon: '🐳' },
+        { name: '海豚', icon: '🐬' },
+        { name: '海星', icon: '⭐' }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `点击海洋动物`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'insect': {
+    generateQuestion() {
+      const insects = [
+        { name: '蜜蜂', icon: '🐝' },
+        { name: '蝴蝶', icon: '🦋' },
+        { name: '蚂蚁', icon: '🐜' }
+      ];
+      const target = insects[Math.floor(Math.random() * insects.length)];
+      return { target, question: `点击昆虫`, options: insects };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'bird': {
+    generateQuestion() {
+      const birds = [
+        { name: '小鸟', icon: '🐦' },
+        { name: '鹦鹉', icon: '🦜' },
+        { name: '鸽子', icon: '🐕' }
+      ];
+      const target = birds[Math.floor(Math.random() * birds.length)];
+      return { target, question: `点击小鸟`, options: birds };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'pet': {
+    generateQuestion() {
+      const pets = [
+        { name: '小狗', icon: '🐕' },
+        { name: '小猫', icon: '🐱' },
+        { name: '小金鱼', icon: '🐠' }
+      ];
+      const target = pets[Math.floor(Math.random() * pets.length)];
+      return { target, question: `点击宠物`, options: pets };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
+  },
+  'wild-animal': {
+    generateQuestion() {
+      const animals = [
+        { name: '老虎', icon: '🐯' },
+        { name: '狮子', icon: '🦁' },
+        { name: '熊猫', icon: '🐼' }
+      ];
+      const target = animals[Math.floor(Math.random() * animals.length)];
+      return { target, question: `点击野生动物`, options: animals };
+    },
+    speakQuestion(q) { speak(q.question); },
+    check(answer, q) { return answer.name === q.target.name; }
   }
 };
 
