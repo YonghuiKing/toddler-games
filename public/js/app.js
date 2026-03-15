@@ -8,12 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderGameCards() {
   const grid = document.getElementById('gameGrid');
-  GAMES.forEach(game => {
+  GAMES.forEach((game, index) => {
     const card = document.createElement('div');
     card.className = 'game-card';
     card.style.setProperty('--card-color', game.color);
     card.style.setProperty('--card-color-2', game.color2);
     card.innerHTML = `
+      <span class="game-number">${index + 1}</span>
       <span class="game-icon">${game.icon}</span>
       <h3 class="game-title">${game.name}</h3>
       <span class="game-age">${game.age}</span>

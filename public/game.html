@@ -15,7 +15,11 @@
     .game-title { font-size: 24px; color: #2D3436; }
     .score-display { font-size: 28px; color: #FDCB6E; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
     .question-display { text-align: center; padding: 20px; font-size: 32px; color: #2D3436; margin-bottom: 20px; }
-    .speak-btn { font-size: 24px; background: #4ECDC4; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; margin-left: 15px; vertical-align: middle; box-shadow: 0 3px 10px rgba(78,205,196,0.4); }
+    .speak-btn { font-size: 24px; background: #4ECDC4; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; margin-left: 15px; vertical-align: middle; box-shadow: 0 3px 10px rgba(78,205,196,0.4); transition: all 0.3s; }
+    .speak-btn:hover { transform: scale(1.1); background: #26A69A; }
+    .speak-btn:active { transform: scale(0.95); }
+    .speak-btn.speaking { animation: speakingPulse 0.5s infinite; }
+    @keyframes speakingPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(78,205,196,0.4); } 50% { box-shadow: 0 0 0 15px rgba(78,205,196,0); } }
     .game-area { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
     .options-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 800px; }
     .game-option { width: 150px; height: 150px; background: white; border-radius: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 60px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid transparent; user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -36,7 +40,47 @@
     .direction-cell:hover { transform: scale(1.05); border-color: #4ECDC4; }
     .direction-cell.center { background: #F1F2F6; font-size: 20px; color: #636E72; }
     .items-row { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
-    .item-display { font-size: 60px; }
+    .item-display { font-size: 60px; cursor: pointer; transition: transform 0.2s; }
+    .item-display:hover { transform: scale(1.1); }
+    .item-display:active { transform: scale(0.95); }
+    
+    /* 题目切换动画 */
+    .question-display {
+      animation: questionIn 0.4s ease-out;
+    }
+    @keyframes questionIn {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    /* 选项进入动画 */
+    .options-grid {
+      animation: optionsIn 0.5s ease-out;
+    }
+    @keyframes optionsIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    
+    /* 游戏结束大星星背景 */
+    .end-celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .celebration-star {
+      position: absolute;
+      font-size: 30px;
+      animation: celebrationFall 3s linear infinite;
+    }
+    @keyframes celebrationFall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
     @media (max-width: 768px) {
       .game-header { flex-direction: column; gap: 15px; text-align: center; }
       .game-option { width: 120px; height: 120px; font-size: 45px; }
@@ -435,17 +479,64 @@
       });
     }
     
-    function replayQuestion() { if (currentQuestion && !isAnswering) GameLogic[currentGame.id].speakQuestion(currentQuestion); }
+    function replayQuestion() { 
+      if (currentQuestion && !isAnswering) {
+        const btn = document.querySelector('.speak-btn');
+        btn.classList.add('speaking');
+        GameLogic[currentGame.id].speakQuestion(currentQuestion);
+        setTimeout(() => btn.classList.remove('speaking'), 1000);
+      }
+    }
     
     function endGame() {
       const msg = score >= 80 ? '超级厉害！' : score >= 50 ? '真棒！' : '加油！';
       speak(`游戏结束！你得了${score}分，${msg}`);
       document.getElementById('questionText').textContent = `🎉 游戏结束！得分：${score} 🎉`;
+      
+      // 播放结束音效
+      playGameEndSound();
+      
       fetch('/api/score', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({score})});
-      document.getElementById('gameOptions').innerHTML = `
-        <button class="btn btn-primary" onclick="restartGame()" style="font-size:24px;padding:20px 50px;">再玩一次 🔄</button>
-        <button class="btn btn-secondary" onclick="location.href='/'" style="font-size:24px;padding:20px 50px;margin-left:20px;">返回主页 🏠</button>
+      
+      const resultContainer = document.createElement('div');
+      resultContainer.style.cssText = 'text-align:center;animation: fadeInUp 0.5s ease-out';
+      
+      // 根据分数显示不同表情
+      let emoji = '💪';
+      if (score >= 80) emoji = '🏆';
+      else if (score >= 50) emoji = '⭐';
+      
+      resultContainer.innerHTML = `
+        <div style="font-size:100px;margin-bottom:20px;animation: bounce 1s infinite">${emoji}</div>
+        <div style="font-size:36px;margin-bottom:30px;color:#2D3436">${msg}</div>
+        <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="restartGame()" style="font-size:24px;padding:20px 50px;">再玩一次 🔄</button>
+          <button class="btn btn-secondary" onclick="location.href='/'" style="font-size:24px;padding:20px 50px;">返回主页 🏠</button>
+        </div>
       `;
+      document.getElementById('gameOptions').innerHTML = '';
+      document.getElementById('gameOptions').appendChild(resultContainer);
+    }
+    
+    function playGameEndSound() {
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const notes = score >= 80 ? [523.25, 659.25, 783.99, 1046.50, 1318.51] : [523.25, 659.25, 783.99];
+        notes.forEach((freq, i) => {
+          setTimeout(() => {
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            osc.start();
+            osc.stop(audioContext.currentTime + 0.3);
+          }, i * 100);
+        });
+      } catch (e) {}
     }
     
     function restartGame() { score = 0; questionCount = 0; document.getElementById('score').textContent = '0'; nextQuestion(); }
