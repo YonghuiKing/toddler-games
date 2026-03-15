@@ -50,15 +50,18 @@ async function handleApi(req, res) {
   if (url === '/api/register' && method === 'POST') {
     const { username, password } = await parseBody(req);
     if (!username || !password) {
-      res.writeHead(400, res.end(JSON.stringify({ success: false, message: '请填写完整信息' })));
+      res.writeHead(400);
+      res.end(JSON.stringify({ success: false, message: '请填写完整信息' }));
       return;
     }
     if (users.has(username)) {
-      res.writeHead(400, res.end(JSON.stringify({ success: false, message: '用户名已存在' })));
+      res.writeHead(400);
+      res.end(JSON.stringify({ success: false, message: '用户名已存在' }));
       return;
     }
     users.set(username, { password, score: 0, createdAt: new Date().toISOString() });
-    res.writeHead(200, res.end(JSON.stringify({ success: true, message: '注册成功' })));
+    res.writeHead(200);
+    res.end(JSON.stringify({ success: true, message: '注册成功' }));
     return;
   }
 
@@ -67,11 +70,13 @@ async function handleApi(req, res) {
     const { username, password } = await parseBody(req);
     const user = users.get(username);
     if (!user || user.password !== password) {
-      res.writeHead(401, res.end(JSON.stringify({ success: false, message: '用户名或密码错误' })));
+      res.writeHead(401);
+      res.end(JSON.stringify({ success: false, message: '用户名或密码错误' }));
       return;
     }
     currentUser = username;
-    res.writeHead(200, res.end(JSON.stringify({ success: true, username, score: user.score })));
+    res.writeHead(200);
+    res.end(JSON.stringify({ success: true, username, score: user.score }));
     return;
   }
 
@@ -79,9 +84,11 @@ async function handleApi(req, res) {
   if (url === '/api/user' && method === 'GET') {
     if (currentUser) {
       const user = users.get(currentUser);
-      res.writeHead(200, res.end(JSON.stringify({ username: currentUser, score: user?.score || 0 })));
+      res.writeHead(200);
+      res.end(JSON.stringify({ username: currentUser, score: user?.score || 0 }));
     } else {
-      res.writeHead(200, res.end(JSON.stringify({ username: null })));
+      res.writeHead(200);
+      res.end(JSON.stringify({ username: null }));
     }
     return;
   }
@@ -89,7 +96,8 @@ async function handleApi(req, res) {
   // 登出
   if (url === '/api/logout' && method === 'POST') {
     currentUser = null;
-    res.writeHead(200, res.end(JSON.stringify({ success: true })));
+    res.writeHead(200);
+    res.end(JSON.stringify({ success: true }));
     return;
   }
 
@@ -100,11 +108,13 @@ async function handleApi(req, res) {
       const user = users.get(username);
       user.score = (user.score || 0) + score;
     }
-    res.writeHead(200, res.end(JSON.stringify({ success: true })));
+    res.writeHead(200);
+    res.end(JSON.stringify({ success: true }));
     return;
   }
 
-  res.writeHead(404, res.end(JSON.stringify({ error: 'Not Found' })));
+  res.writeHead(404);
+  res.end(JSON.stringify({ error: 'Not Found' }));
 }
 
 function serveStatic(req, res) {

@@ -14,6 +14,18 @@
     .game-info { display: flex; align-items: center; gap: 30px; }
     .game-title { font-size: 24px; color: #2D3436; }
     .score-display { font-size: 28px; color: #FDCB6E; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    .sound-toggle { 
+      background: rgba(255,255,255,0.9); 
+      border: none; 
+      font-size: 24px; 
+      width: 45px; 
+      height: 45px; 
+      border-radius: 50%; 
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+    .sound-toggle:hover { transform: scale(1.1); }
     .question-display { text-align: center; padding: 20px; font-size: 32px; color: #2D3436; margin-bottom: 20px; }
     .speak-btn { font-size: 24px; background: #4ECDC4; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; margin-left: 15px; vertical-align: middle; box-shadow: 0 3px 10px rgba(78,205,196,0.4); transition: all 0.3s; }
     .speak-btn:hover { transform: scale(1.1); background: #26A69A; }
@@ -94,6 +106,7 @@
     <header class="game-header">
       <button class="back-btn" onclick="location.href='/'">⬅️</button>
       <div class="game-info">
+        <button class="sound-toggle" id="soundToggle" onclick="toggleSound()" title="开关声音">🔊</button>
         <span class="game-title" id="gameTitle">游戏</span>
         <span class="score-display">⭐ <span id="score">0</span></span>
       </div>
@@ -109,7 +122,17 @@
   <script src="/js/games.js"></script>
   <script>
     let currentGame = null, currentQuestion = null, score = 0, isAnswering = false, questionCount = 0;
+    let soundEnabled = true;
     const MAX_QUESTIONS = 10;
+    
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('soundToggle');
+      btn.textContent = soundEnabled ? '🔊' : '🔇';
+      if (!soundEnabled) {
+        window.speechSynthesis.cancel();
+      }
+    }
     
     function initGame() {
       const gameId = new URLSearchParams(location.search).get('game');
@@ -414,6 +437,7 @@
     
     // 音效播放函数
     function playSoundEffect(type) {
+      if (!soundEnabled) return;
       try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
@@ -445,23 +469,33 @@
       }
     }
     
-    // 游戏开始音效
+    // 游戏开始音效 - 更可爱活泼的旋律
     function playGameStartSound() {
       try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-        notes.forEach((freq, i) => {
+        // 使用儿童音乐常用的音符组合
+        const melody = [
+          { freq: 523.25, delay: 0 },      // C5
+          { freq: 587.33, delay: 100 },    // D5
+          { freq: 659.25, delay: 200 },    // E5
+          { freq: 783.99, delay: 300 },    // G5
+          { freq: 659.25, delay: 400 },    // E5
+          { freq: 783.99, delay: 500 },    // G5
+          { freq: 1046.50, delay: 600 }    // C6
+        ];
+        melody.forEach(note => {
           setTimeout(() => {
             const osc = audioContext.createOscillator();
             const gain = audioContext.createGain();
             osc.connect(gain);
             gain.connect(audioContext.destination);
-            osc.frequency.value = freq;
-            gain.gain.setValueAtTime(0.2, audioContext.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+            osc.frequency.value = note.freq;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
             osc.start();
-            osc.stop(audioContext.currentTime + 0.15);
-          }, i * 80);
+            osc.stop(audioContext.currentTime + 0.2);
+          }, note.delay);
         });
       } catch (e) {}
     }
