@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>幼儿游戏乐园</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🎈 幼儿游戏乐园 🎈</h1>
+      <p class="subtitle">和爸爸妈妈一起玩游戏吧！</p>
+    </header>
+
+    <nav class="user-nav">
+      <button id="loginBtn" class="btn btn-secondary">登录</button>
+      <button id="registerBtn" class="btn btn-secondary">注册</button>
+      <div id="userInfo" class="user-info" style="display: none;">
+        <span id="usernameDisplay"></span>
+        <span class="total-score">⭐ <span id="totalScore">0</span></span>
+        <button id="logoutBtn" class="btn btn-small">退出</button>
+      </div>
+    </nav>
+
+    <main class="game-grid" id="gameGrid"></main>
+
+    <footer class="footer">
+      <p>💝 让学习变得有趣 💝</p>
+    </footer>
+  </div>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>登录</h2>
+      <form id="loginForm">
+        <input type="text" id="loginUsername" placeholder="用户名" required>
+        <input type="password" id="loginPassword" placeholder="密码" required>
+        <button type="submit" class="btn btn-primary">登录</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>注册</h2>
+      <form id="registerForm">
+        <input type="text" id="registerUsername" placeholder="用户名" required>
+        <input type="password" id="registerPassword" placeholder="密码" required>
+        <button type="submit" class="btn btn-primary">注册</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/games.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

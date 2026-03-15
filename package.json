@@ -1,0 +1,13 @@
+{
+  "name": "toddler-games",
+  "version": "1.0.0",
+  "description": "幼儿早教游戏应用",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["toddler", "education", "games"],
+  "author": "",
+  "license": "MIT"
+}
